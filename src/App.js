@@ -5,4 +5,4 @@ const App = () => {
   return <VistaPrincipal />;
 };
 
-export default App;
+export default App
