@@ -68,7 +68,7 @@ export function Component({ temperatura }) {
 
   return (
     <Card
-      className="w-full max-w-screen-xl mx-auto shadow-lg rounded-lg overflow-hidden"
+      className="w-full max-w-screen-xl mx-auto shadow-lg rounded-lg h-full"
       temperatura={temperatura}
     >
       <CardHeader>
