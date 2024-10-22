@@ -1,33 +1,27 @@
-// // src/components/ui/Card.jsx
-// import React from "react";
-
-// const Card = ({ children, className }) => {
-//   return (
-//     <div className={`p-4 bg-white shadow-md rounded-lg ${className}`}>
-//       {children}
-//     </div>
-//   );
-// };
-
-// const CardContent = ({ children, className }) => {
-//   return <div className={`p-4 ${className}`}>{children}</div>;
-// };
-
-// export { Card, CardContent };
-
-// src/components/ui/Card.jsx
 import React from "react";
 
-const Card = ({ children, className }) => {
+const BackgroundColor = (temperatura) => {
+  if (temperatura > 32) {
+    return "bg-[#FDBAAC]";
+  } else if (temperatura > 20) {
+    return "bg-[#f0e1be]";
+  } else {
+    return "bg-[#5E57A6]";
+  }
+};
+
+const Card = ({ children, className, temperatura }) => {
+  const bgColorClass = BackgroundColor(temperatura);
+
   return (
-    <div className={`p-4 bg-[#5E57A6] shadow-md rounded-lg ${className}`}>
+    <div className={`p-4 ${bgColorClass} shadow-md rounded-lg ${className}`}>
       {children}
     </div>
   );
 };
 
 const CardContent = ({ children, className }) => {
-  return <div className={` ${className}`}>{children}</div>;
+  return <div className={className}>{children}</div>;
 };
 
 const CardDescription = ({ children, className }) => {
@@ -35,7 +29,7 @@ const CardDescription = ({ children, className }) => {
 };
 
 const CardHeader = ({ children, className }) => {
-  return <div className={` pb-2  ${className}`}>{children}</div>;
+  return <div className={`pb-2 ${className}`}>{children}</div>;
 };
 
 const CardTitle = ({ children, className }) => {

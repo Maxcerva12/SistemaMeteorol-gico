@@ -30,23 +30,53 @@ const chartData = [
   { month: "June", desktop: 214, mobile: 140 },
 ];
 
-const chartConfig = {
-  desktop: {
-    label: "Temperatura",
-    color: "#3b82f6",
-  },
-  mobile: {
-    label: "Humedad",
-    color: "#10b981",
-  },
+const getColorByTemperature = (temperatura) => {
+  if (temperatura > 32) {
+    return {
+      barColor: "#6622CC", 
+      barColor2: "#ff784a",
+      rayaColor: "black",
+      titleColor: "#000",
+    }; // Alta temperatura
+  } else if (temperatura > 20) {
+    return {
+      barColor: "#026C7C",
+      barColor2: "#d53f51",
+      rayaColor: "black",
+      titleColor: "#d53f51",
+    }; // Temperatura moderada
+  } else {
+    return {
+      barColor: "#3b82f6",
+      barColor2: "#10b981",
+      rayaColor: "#fff",
+      titleColor: "#fff",
+    }; // Baja temperatura
+  }
 };
 
-export function Componentlinea() {
+export function Componentlinea({ temperatura }) {
+  const { barColor, barColor2, rayaColor, titleColor } =
+    getColorByTemperature(temperatura);
+
+  const chartConfig = {
+    desktop: {
+      label: "Temperatura",
+      color: barColor,
+    },
+    mobile: {
+      label: "Humedad",
+      color: barColor2,
+    },
+  };
   return (
-    <Card className="w-full  mx-auto min-h-[16rem] ">
+    <Card className="w-full  mx-auto min-h-[16rem]" temperatura={temperatura}>
       <CardHeader className="space-y-1">
-        <div className="flex items-center space-x-2">
-          <TrendingUp className="w-5 h-5 text-blue-500" />
+        <div
+          className="flex items-center space-x-2"
+          style={{ color: titleColor }}
+        >
+          <TrendingUp className="w-5 h-5 " />
           <CardTitle className="text-2xl font-bold">
             Grafico de Temperatura y Humedad
           </CardTitle>
@@ -64,17 +94,17 @@ export function Componentlinea() {
                 bottom: 20,
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <CartesianGrid strokeDasharray="3 3" stroke={rayaColor} />
               <XAxis
                 dataKey="month"
                 tickFormatter={(value) => value.slice(0, 3)}
-                stroke="white" /* cambia el color de la barra eje X */
-                tick={{ fill: "white", fontSize: 12 }}
+                stroke={rayaColor} /* cambia el color de la barra eje X */
+                tick={{ fill: rayaColor, fontSize: 12 }}
               />
               <YAxis
-                stroke="white"
+                stroke={rayaColor}
                 /*cambia el color de la barra eje Y  */ tick={{
-                  fill: "white",
+                  fill: rayaColor,
                   fontSize: 15,
                 }}
               />
